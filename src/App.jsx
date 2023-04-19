@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import postsDiv from "./posts";
+import PostsDiv from "./posts";
 import SignInForm from "./SignInForm";
 import "./App.css";
 
@@ -14,8 +14,8 @@ function App() {
       </header>
       <div id="main-section">
         <Routes>
-          <Route path="/" element={postsDiv} />
-          <Route path="/sign-in" element={SignInForm} />
+          <Route path="/" element={<PostsDiv />} />
+          <Route path="/sign-in" element={<SignInForm />} />
         </Routes>
       </div>
     </div>
