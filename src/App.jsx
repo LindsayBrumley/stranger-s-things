@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import PostsDiv from "./posts";
 import SignInForm from "./SignInForm";
+import useAuth from "./useAuth";
 import "./App.css";
 
 function App() {
+  const { token, user } = useAuth();
   return (
     <div className="App">
       <header>

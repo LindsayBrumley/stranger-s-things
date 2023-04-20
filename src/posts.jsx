@@ -12,12 +12,12 @@ const PostsDiv = () => {
     }
     getPosts();
   }, []);
-
+  console.log(posts);
   return (
     <div className="single-post">
       {posts.map((post) => {
         return (
-          <div key={post.id}>
+          <div key={post._id}>
             <h3>{post.title}</h3>
             <p>{post.description}</p>
             <p>Price: {post.price}</p>
