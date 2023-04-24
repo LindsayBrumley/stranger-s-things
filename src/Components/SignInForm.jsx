@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { registerUser } from "./api";
-import useAuth from "./useAuth";
-import "./signInForm.css";
+import { registerUser } from "../api";
+import useAuth from "../useAuth";
+import "../signInForm.css";
 
 const SignInForm = () => {
   const [username, setUsername] = useState("");
@@ -46,4 +46,5 @@ const SignInForm = () => {
     </div>
   );
 };
+
 export default SignInForm;

@@ -38,7 +38,7 @@ export async function fetchMe(token) {
     const response = await fetch(`${baseUrl}/users/me`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     const result = await response.json();
@@ -46,5 +46,27 @@ export async function fetchMe(token) {
     return result;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function loginUser(username, password) {
+  try {
+    const response = await fetch(`${baseUrl}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: {
+          username,
+          password,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err);
   }
 }
