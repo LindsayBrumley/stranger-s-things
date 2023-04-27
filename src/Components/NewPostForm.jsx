@@ -1,26 +1,34 @@
 import { useState } from "react";
 import { makePost } from "../api";
+import useAuth from "../useAuth";
+import { useNavigate } from "react-router-dom";
 export default function NewPostsForm() {
+  const { token } = useAuth();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [location, setLocation] = useState("");
   const [willDeliver, setWillDeliver] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      //getting error message unauthorized
-      const token = localStorage.getItem("token");
       const result = await makePost(
-        token,
         title,
         description,
         price,
         location,
-        willDeliver
+        willDeliver,
+        token
       );
-      return result;
+
+      setTitle("");
+      setDescription("");
+      setPrice("");
+      setLocation("");
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
