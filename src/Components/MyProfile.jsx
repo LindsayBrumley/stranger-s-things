@@ -1,6 +1,12 @@
 import React from "react";
 import { fetchMe } from "../api";
+import NewPostsForm from "./NewPostForm";
 
-export async function MyProfile() {
-  return <h3> My Profile</h3>;
+export function MyProfile() {
+  return (
+    <div>
+      <h3> My Profile</h3>
+      <NewPostsForm />
+    </div>
+  );
 }

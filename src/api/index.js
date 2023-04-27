@@ -70,3 +70,35 @@ export async function loginUser(username, password) {
     console.error(err);
   }
 }
+
+export async function makePost(
+  token,
+  title,
+  description,
+  price,
+  location,
+  willDeliver
+) {
+  try {
+    const response = await fetch(`${baseUrl}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer${token}`,
+      },
+      body: JSON.stringify({
+        post: {
+          title,
+          description,
+          price,
+          location,
+          willDeliver,
+        },
+      }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
