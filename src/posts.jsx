@@ -48,9 +48,9 @@ const PostsDiv = () => {
             {token && !post.isAuthor ? (
               <form
                 onSubmit={async (event) => {
-                  event.preventDefault;
+                  event.preventDefault();
                   await sendMessage(post._id, token, event.target.value);
-                  console.log("message: ", result);
+                  console.log("message sent");
                 }}
               >
                 <label>Send a message:</label>
