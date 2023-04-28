@@ -17,13 +17,13 @@ export function MyProfile() {
   console.log("user from profile: ", user);
   return (
     <div>
-      <h3>My Profile</h3>
-      <h3>Posts</h3>
+      <h2>My Profile</h2>
+      <h3 id="my-posts">My Posts</h3>
       <div>
         {user.posts &&
           user.posts.map((post) => {
             return (
-              <div key={post._id}>
+              <div className="single-post-card" key={post._id}>
                 <h4>{post.title}</h4>
                 <p>{post.description}</p>
                 <p>{post.price}</p>

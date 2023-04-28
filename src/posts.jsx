@@ -16,10 +16,10 @@ const PostsDiv = () => {
   }, []);
   console.log(posts);
   return (
-    <div className="single-post">
+    <div className="posts-div">
       {posts.map((post) => {
         return (
-          <div key={post._id}>
+          <div className="single-post-card" key={post._id}>
             <h3>{post.title}</h3>
             <p>{post.author.username}</p>
             <p>{post.description}</p>

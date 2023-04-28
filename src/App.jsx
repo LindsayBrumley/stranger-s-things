@@ -13,7 +13,7 @@ function App() {
   const navigate = useNavigate();
   return (
     <div className="App">
-      <header>
+      <header id="main-header">
         <h1>Stranger's Things</h1>
         {token ? <p>Welcome, {user.username}</p> : null}
         <nav>
