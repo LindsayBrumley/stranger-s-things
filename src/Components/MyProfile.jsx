@@ -29,9 +29,21 @@ export function MyProfile() {
                 <p>{post.price}</p>
                 <p>{post.location}</p>
                 <p>{post.willDeliver}</p>
+                <button
+                  onClick={async () => {
+                    await deletePost(post._id, token);
+                    const posts = await fetchAllPosts(token);
+                    setPosts(posts.data.posts);
+                  }}
+                >
+                  Delete Post
+                </button>
               </div>
             );
           })}
+      </div>
+      <div>
+        <h3>Messages</h3>
       </div>
       <NewPostsForm />
     </div>

@@ -46,18 +46,16 @@ const PostsDiv = () => {
               </button>
             ) : null}
             {token && !post.isAuthor ? (
-              <form>
+              <form
+                onSubmit={async (event) => {
+                  event.preventDefault;
+                  await sendMessage(post._id, token, event.target.value);
+                  console.log("message: ", result);
+                }}
+              >
                 <label>Send a message:</label>
                 <input type="text" />
-                <button
-                  onClick={async (event) => {
-                    event.preventDefault;
-                    await sendMessage(post._id, token, event.target.value);
-                    console.log(result);
-                  }}
-                >
-                  Send
-                </button>
+                <button>Send</button>
               </form>
             ) : null}
           </div>

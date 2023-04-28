@@ -151,7 +151,7 @@ export const editPost = async (
         },
       }),
     });
-    const result = await response.json;
+    const result = await response.json();
     return result;
   } catch (error) {
     console.error(err);
@@ -172,7 +172,7 @@ export const sendMessage = async (id, token, content) => {
         },
       }),
     });
-    const result = await response.json;
+    const result = await response.json();
     return result;
   } catch (error) {
     console.error(error);
