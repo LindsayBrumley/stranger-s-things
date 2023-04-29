@@ -2,9 +2,12 @@ import React from "react";
 import { fetchAllPosts, deletePost, editPost, sendMessage } from "./api";
 import { useState, useEffect } from "react";
 import useAuth from "./useAuth";
+import SinglePostCard from "./Components/SinglePostCard";
 
 const PostsDiv = () => {
   const [posts, setPosts] = useState([]);
+  const [content, setContent] = useState("");
+  const [searchParam, setSearchParam] = useState("");
   const { token } = useAuth();
 
   useEffect(() => {
@@ -14,53 +17,27 @@ const PostsDiv = () => {
     }
     getPosts();
   }, []);
-  console.log(posts);
+  console.log("all posts: ", posts);
+
+  const filteredPosts = posts.filter((post) => {
+    return post.title.toLowerCase().includes(searchParam);
+  });
+  const postsToDisplay = searchParam ? posts : filteredPosts;
+  const allPostsToDisplay = postsToDisplay.map((post) => {
+    return <SinglePostCard key={post._id} post={post} token={token} />;
+  });
   return (
-    <div className="posts-div">
-      {posts.map((post) => {
-        return (
-          <div className="single-post-card" key={post._id}>
-            <h3>{post.title}</h3>
-            <p>{post.author.username}</p>
-            <p>{post.description}</p>
-            <p>Price: {post.price}</p>
-            <p>Location: {post.location}</p>
-            {token && post.isAuthor ? (
-              <button
-                onClick={async () => {
-                  await editPost(post._id, token);
-                }}
-              >
-                Edit Post
-              </button>
-            ) : null}
-            {token && post.isAuthor ? (
-              <button
-                onClick={async () => {
-                  await deletePost(post._id, token);
-                  const posts = await fetchAllPosts(token);
-                  setPosts(posts.data.posts);
-                }}
-              >
-                Delete Post
-              </button>
-            ) : null}
-            {token && !post.isAuthor ? (
-              <form
-                onSubmit={async (event) => {
-                  event.preventDefault();
-                  await sendMessage(post._id, token, event.target.value);
-                  console.log("message sent");
-                }}
-              >
-                <label>Send a message:</label>
-                <input type="text" />
-                <button>Send</button>
-              </form>
-            ) : null}
-          </div>
-        );
-      })}
+    <div>
+      <div>
+        <input
+          type="text"
+          placeholder="search"
+          onChange={(event) => {
+            setSearchParam(event.target.value.toLowerCase());
+          }}
+        />
+      </div>
+      {searchParam ? filteredPosts : allPostsToDisplay}
     </div>
   );
 };
