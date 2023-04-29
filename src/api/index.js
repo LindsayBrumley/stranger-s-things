@@ -138,7 +138,7 @@ export const editPost = async (
     const response = await fetch(`${baseUrl}/posts/${id}`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application.json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -159,11 +159,12 @@ export const editPost = async (
 };
 
 export const sendMessage = async (id, token, content) => {
+  console.log("Params from sendMessage: ", token);
   try {
     const response = await fetch(`${baseUrl}/posts/${id}/messages`, {
       method: "POST",
       headers: {
-        "Content-Type": "application.json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -173,6 +174,7 @@ export const sendMessage = async (id, token, content) => {
       }),
     });
     const result = await response.json();
+    console.log("result from sendMessage: ", result);
     return result;
   } catch (error) {
     console.error(error);

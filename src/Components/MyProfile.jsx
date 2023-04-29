@@ -44,6 +44,37 @@ export function MyProfile() {
       </div>
       <div>
         <h3>Messages</h3>
+        <h4>My messages</h4>
+        {user.messages &&
+          user.messages
+            .filter((message) => {
+              return message.fromUser._id === user._id;
+            })
+            .map((message) => {
+              return (
+                <div className="my-messages" key={message._id}>
+                  <p>To: {message.post.author.username}</p>
+                  <p>Message: {message.content}</p>
+                  <p>Post: {message.post.title}</p>
+                </div>
+              );
+            })}
+        <br />
+        <h4>Recieved messages</h4>
+        {user.messages &&
+          user.messages
+            .filter((message) => {
+              return message.fromUser._id !== user._id;
+            })
+            .map((message) => {
+              return (
+                <div classname="recieved-messages" key={message._id}>
+                  <p>From: {message.fromUser.username}</p>
+                  <p>Message: {message.content}</p>
+                  <p>Post: {message.post.title}</p>
+                </div>
+              );
+            })}
       </div>
       <NewPostsForm />
     </div>

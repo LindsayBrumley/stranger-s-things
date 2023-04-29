@@ -1,4 +1,7 @@
-const SinglePostCard = ({ post }, token) => {
+import { useState } from "react";
+import { sendMessage } from "../api/index.js";
+const SinglePostCard = ({ post, token }) => {
+  const [content, setContent] = useState("");
   return (
     <div className="single-post-card">
       <h3>{post.title}</h3>

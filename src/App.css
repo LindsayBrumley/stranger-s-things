@@ -56,3 +56,7 @@ button:focus-visible {
 a:hover {
     color: #747bff;
   }
+
+  .my-messages, .recieved-messages {
+    margin: 40px;
+  }

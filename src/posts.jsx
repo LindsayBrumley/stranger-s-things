@@ -6,7 +6,6 @@ import SinglePostCard from "./Components/SinglePostCard";
 
 const PostsDiv = () => {
   const [posts, setPosts] = useState([]);
-  const [content, setContent] = useState("");
   const [searchParam, setSearchParam] = useState("");
   const { token } = useAuth();
 
@@ -22,10 +21,8 @@ const PostsDiv = () => {
   const filteredPosts = posts.filter((post) => {
     return post.title.toLowerCase().includes(searchParam);
   });
-  const postsToDisplay = searchParam ? posts : filteredPosts;
-  const allPostsToDisplay = postsToDisplay.map((post) => {
-    return <SinglePostCard key={post._id} post={post} token={token} />;
-  });
+  console.log("filtered posts: ", filteredPosts);
+  const postsToDisplay = searchParam ? filteredPosts : posts;
   return (
     <div>
       <div>
@@ -37,7 +34,9 @@ const PostsDiv = () => {
           }}
         />
       </div>
-      {searchParam ? filteredPosts : allPostsToDisplay}
+      {postsToDisplay.map((post) => {
+        return <SinglePostCard key={post._id} post={post} token={token} />;
+      })}
     </div>
   );
 };
