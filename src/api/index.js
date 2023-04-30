@@ -122,7 +122,7 @@ export const deletePost = async (id, token) => {
     console.log(result);
     return result;
   } catch (err) {
-    console.error(err);
+    console.error(error);
   }
 };
 
@@ -132,12 +132,15 @@ export const editPost = async (
   price,
   location,
   willDeliver,
-  token
+  token,
+  id
 ) => {
+  console.log(id);
   try {
     const response = await fetch(`${baseUrl}/posts/${id}`, {
       method: "PATCH",
       headers: {
+        "Content-Type": "application.json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
@@ -154,12 +157,11 @@ export const editPost = async (
     const result = await response.json();
     return result;
   } catch (error) {
-    console.error(err);
+    console.error(error);
   }
 };
 
 export const sendMessage = async (id, token, content) => {
-  console.log("Params from sendMessage: ", token);
   try {
     const response = await fetch(`${baseUrl}/posts/${id}/messages`, {
       method: "POST",
@@ -174,7 +176,6 @@ export const sendMessage = async (id, token, content) => {
       }),
     });
     const result = await response.json();
-    console.log("result from sendMessage: ", result);
     return result;
   } catch (error) {
     console.error(error);
